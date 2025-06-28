@@ -99,7 +99,7 @@ button:hover {
   background-color: #ff4c4c;
   padding: 5px 10px;
   margin-left: 10px;
-  border-radius: 5px;
+  border-radius: 80px;
   font-weight: normal;
 }
 
@@ -107,19 +107,77 @@ button:hover {
 .add-food-controls {
   margin-top: 10px;
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
+  align-items: center; /* Align items vertically in the middle */
+  gap: 10px; /* Space between elements */
 }
 
-select, input[type="number"] {
-  padding: 5px;
-  border-radius: 5px;
+/* Specific styles for the food filter input (search bar) */
+.add-food-controls .food-filter-input {
+  width: 100%; /* Make it take full width, forcing other elements below it */
+  padding: 8px;
+  border-radius: 80px;
   border: none;
-  width: 150px;
+  margin-bottom: 5px; /* Space between filter and the row below */
+  background-color: #ffffff; /* Dark gray background */
+  color: rgb(0, 0, 0); /* Light text for contrast on dark background */
 }
 
-input[type="number"] {
-  width: 70px;
+/* Styles for the select dropdown */
+.add-food-controls select {
+    flex-grow: 1; /* Allow select to grow and take available space */
+    padding: 8px;
+    border-radius: 80px;
+    border: none;
+    background-color: #6a6a6a; /* Dark gray background */
+    color: #ddd; /* Light text for contrast on dark background */
+    -webkit-appearance: none; /* Remove default dropdown arrow for custom styling */
+    -moz-appearance: none;
+    appearance: none;
+    /* Custom SVG arrow color to light gray for visibility on dark background */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23dddddd%22%20d%3D%22M287%20197.6l-131.6-131.6c-4.7-4.7-12.3-4.7-17%200L5.4%20197.6c-4.7%204.7-4.7%2012.3%200%2017l11.3%2011.3c4.7%204.7%2012.3%204.7%2017%200l102.8-102.8L258.7%20225.9c4.7%204.7%2012.3%204.7%2017%200l11.3-11.3c4.7-4.7%204.7-12.3%200-17z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 12px auto;
+    padding-right: 30px; /* Make space for the custom arrow */
+    min-width: 150px; /* Ensure a minimum width for the select */
 }
+
+/* Styles for the grams input */
+.add-food-controls input[type="number"] {
+    width: 70px; /* Adjusted width for grams input */
+    padding: 8px; /* Consistent padding */
+    border-radius: 10px;
+    border: none;
+    background-color: #ffffff; /* Dark gray background */
+    color: rgb(0, 0, 0); /* Light text color */
+}
+
+/* Styles for the Add button */
+.add-food-controls button {
+    padding: 8px 15px; /* Consistent padding with other buttons */
+    border-radius: 80px;
+    font-weight: bold;
+    white-space: nowrap; /* Prevent button text from wrapping */
+}
+
+/* Optional: Adjust for smaller screens */
+@media (max-width: 600px) {
+    .add-food-controls {
+        flex-direction: column; /* Stack elements vertically on small screens */
+        align-items: stretch; /* Stretch items to fill container width */
+    }
+    .add-food-controls .food-filter-input,
+    .add-food-controls select,
+    .add-food-controls input[type="number"],
+    .add-food-controls button {
+        width: 100%; /* Full width on small screens */
+    }
+    .add-food-controls input[type="number"] {
+        text-align: center; /* Center text in number input on small screens */
+    }
+}
+
 
 /* Summary styling */
 .summary-section p {
