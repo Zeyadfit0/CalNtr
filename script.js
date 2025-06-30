@@ -167,6 +167,7 @@ const foodsData = {
   "تانج تفاح": { calories: 420, protein: 0, carbs: 99, fats: 0 },
   "رز صيادية": { calories: 160, protein: 3, carbs: 30, fats: 6 },
   "بيض امليت": { calories: 180, protein: 12, carbs: 2, fats: 15 },
+  "مولتو": { calories: 463, protein: 7.4, carbs: 48, fats: 27 },
 };
 
 
