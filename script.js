@@ -2,7 +2,7 @@
 const foodsData = {
   "جبنة قريش": { calories: 98, protein: 11, carbs: 3.4, fats: 4.3 },
   "موز": { calories: 89, protein: 1.1, carbs: 25.4, fats: 0.3 },
-  "عيش بلدي": { calories: 286, protein: 8.6, carbs: 58.6, fats: 2.9 },
+  "عيش بلدي": { calories: 286, protein: 8.6, carbs: 55.7, fats: 2.9 },
   "ارز بالشعرية بيتي": { calories: 147, protein: 3, carbs: 30.3, fats: 1.8 },
   "اوراك دجاج (قبل الطهي)": { calories: 173, protein: 28, carbs: 0, fats: 6 },
   "فخد": { calories: 125, protein: 16.4, carbs: 0.5, fats: 6.5 },
@@ -235,9 +235,9 @@ savedData.meals[meal].forEach((food, index) => {
   const infoSpan = document.createElement("span");
   infoSpan.textContent =
     `Calories:${food.calories % 1 === 0 ? food.calories.toFixed(0) : food.calories.toFixed(1)}, ` +
-    `Protein: ${food.protein % 1 === 0 ? food.protein.toFixed(0) : food.protein.toFixed(1)}g, ` +
-    `Carb: ${food.carbs % 1 === 0 ? food.carbs.toFixed(0) : food.carbs.toFixed(1)}g, ` +
-    `Fat: ${food.fats % 1 === 0 ? food.fats.toFixed(0) : food.fats.toFixed(1)}g`;
+    `Protein:${food.protein % 1 === 0 ? food.protein.toFixed(0) : food.protein.toFixed(1)}g, ` +
+    `Carb:${food.carbs % 1 === 0 ? food.carbs.toFixed(0) : food.carbs.toFixed(1)}g, ` +
+    `Fat:${food.fats % 1 === 0 ? food.fats.toFixed(0) : food.fats.toFixed(1)}g`;
 
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "Delete";
