@@ -234,7 +234,7 @@ savedData.meals[meal].forEach((food, index) => {
   // تعديل العرض هنا
   const infoSpan = document.createElement("span");
   infoSpan.textContent =
-    `Calories: ${food.calories % 1 === 0 ? food.calories.toFixed(0) : food.calories.toFixed(1)}, ` +
+    `Calories:${food.calories % 1 === 0 ? food.calories.toFixed(0) : food.calories.toFixed(1)}, ` +
     `Protein: ${food.protein % 1 === 0 ? food.protein.toFixed(0) : food.protein.toFixed(1)}g, ` +
     `Carb: ${food.carbs % 1 === 0 ? food.carbs.toFixed(0) : food.carbs.toFixed(1)}g, ` +
     `Fat: ${food.fats % 1 === 0 ? food.fats.toFixed(0) : food.fats.toFixed(1)}g`;
