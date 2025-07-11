@@ -222,33 +222,37 @@ function createMealsUI() {
     mealDiv.appendChild(title);
 
     // List food items in meal
-    const foodList = document.createElement("div");
-    foodList.classList.add("food-list");
-    savedData.meals[meal].forEach((food, index) => {
-      const foodItem = document.createElement("div");
-      foodItem.classList.add("food-item");
+const foodList = document.createElement("div");
+foodList.classList.add("food-list");
+savedData.meals[meal].forEach((food, index) => {
+  const foodItem = document.createElement("div");
+  foodItem.classList.add("food-item");
 
-      const nameSpan = document.createElement("span");
-      nameSpan.textContent = `${food.name} - ${food.grams}g`;
+  const nameSpan = document.createElement("span");
+  nameSpan.textContent = `${food.name} - ${food.grams}g`;
 
-      const infoSpan = document.createElement("span");
-      infoSpan.textContent =
-        `Calories:${food.calories.toFixed(1)}, Protein:${food.protein.toFixed(1)}g, Carb:${food.carbs.toFixed(1)}g, Fat:${food.fats.toFixed(1)}g`;
+  // تعديل العرض هنا
+  const infoSpan = document.createElement("span");
+  infoSpan.textContent =
+    `Calories: ${food.calories % 1 === 0 ? food.calories.toFixed(0) : food.calories.toFixed(1)}, ` +
+    `Protein: ${food.protein % 1 === 0 ? food.protein.toFixed(0) : food.protein.toFixed(1)}g, ` +
+    `Carb: ${food.carbs % 1 === 0 ? food.carbs.toFixed(0) : food.carbs.toFixed(1)}g, ` +
+    `Fat: ${food.fats % 1 === 0 ? food.fats.toFixed(0) : food.fats.toFixed(1)}g`;
 
-      const deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "Delete";
-      deleteBtn.addEventListener("click", () => {
-        savedData.meals[meal].splice(index, 1);
-        saveData();
-        createMealsUI();
-      });
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  deleteBtn.addEventListener("click", () => {
+    savedData.meals[meal].splice(index, 1);
+    saveData();
+    createMealsUI();
+  });
 
-      foodItem.appendChild(nameSpan);
-      foodItem.appendChild(infoSpan);
-      foodItem.appendChild(deleteBtn);
-      foodList.appendChild(foodItem);
-    });
-    mealDiv.appendChild(foodList);
+  foodItem.appendChild(nameSpan);
+  foodItem.appendChild(infoSpan);
+  foodItem.appendChild(deleteBtn);
+  foodList.appendChild(foodItem);
+});
+mealDiv.appendChild(foodList);
 
     // Add food controls
     const controls = document.createElement("div");
@@ -302,10 +306,10 @@ function createMealsUI() {
       const foodEntry = {
         name: foodName,
         grams: grams,
-        calories: foodInfo.calories * factor,
-        protein: foodInfo.protein * factor,
-        carbs: foodInfo.carbs * factor,
-        fats: foodInfo.fats * factor
+        calories: Math.round((foodInfo.calories * grams) / 100),
+        protein: Math.round((foodInfo.protein * grams) / 100 * 10) / 10,
+        carbs: Math.round((foodInfo.carbs * grams) / 100 * 10) / 10,
+        fats: Math.round((foodInfo.fats * grams) / 100 * 10) / 10
       };
       savedData.meals[meal].push(foodEntry);
       saveData();
@@ -340,10 +344,15 @@ function updateSummary() {
     });
   });
 
-  document.getElementById("totalCalories").textContent = totalCalories.toFixed(1);
-  document.getElementById("totalProtein").textContent = totalProtein.toFixed(1);
-  document.getElementById("totalCarbs").textContent = totalCarbs.toFixed(1);
-  document.getElementById("totalFats").textContent = totalFats.toFixed(1);
+  // تعديل العرض بحيث يتم حذف الرقم العشري إذا كان 0
+  document.getElementById("totalCalories").textContent = 
+    totalCalories % 1 === 0 ? totalCalories.toFixed(0) : totalCalories.toFixed(1);
+  document.getElementById("totalProtein").textContent = 
+    totalProtein % 1 === 0 ? totalProtein.toFixed(0) : totalProtein.toFixed(1);
+  document.getElementById("totalCarbs").textContent = 
+    totalCarbs % 1 === 0 ? totalCarbs.toFixed(0) : totalCarbs.toFixed(1);
+  document.getElementById("totalFats").textContent = 
+    totalFats % 1 === 0 ? totalFats.toFixed(0) : totalFats.toFixed(1);
 
   document.getElementById("goalCaloriesDisplay").textContent = goalCalories;
   document.getElementById("goalProteinDisplay").textContent = goalProtein;
