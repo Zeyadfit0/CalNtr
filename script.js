@@ -168,6 +168,8 @@ const foodsData = {
   "رز صيادية": { calories: 160, protein: 3, carbs: 30, fats: 6 },
   "بيض امليت": { calories: 180, protein: 12, carbs: 2, fats: 15 },
   "مولتو": { calories: 463, protein: 7.4, carbs: 48, fats: 27 },
+  "فطير قرص سادة": { calories: 434, protein: 7.6, carbs: 63.8, fats: 16.5 },
+  "فوشار بالزيت بعد التحضير": { calories: 500, protein: 10, carbs: 55, fats: 25 },
 };
 
 
@@ -179,11 +181,11 @@ const mealsContainer = document.getElementById("mealsContainer");
 let savedData = JSON.parse(localStorage.getItem("calorieTrackerData")) || {
   goals: { calories: 0, protein: 0, carbs: 0, fats: 0 },
   meals: {
-    Breakfast: [],
-    Snack: [],
-    Lunch: [],
-    Dinner: [],
-    Snack2: []
+      Breakfast: [],
+      Snack: [],
+      Lunch: [],
+      Dinner: [],
+      Snack2: []
   }
 };
 
@@ -198,13 +200,13 @@ function populateFoodSelect(selectElement, filterText = "") {
   const foodNames = Object.keys(foodsData).sort(); // Sort food names alphabetically
 
   foodNames.forEach(foodName => {
-    // Convert both to lowercase for case-insensitive comparison
-    if (foodName.toLowerCase().includes(filterText.toLowerCase())) {
-      const option = document.createElement("option");
-      option.value = foodName;
-      option.textContent = foodName;
-      selectElement.appendChild(option);
-    }
+      // Convert both to lowercase for case-insensitive comparison
+      if (foodName.toLowerCase().includes(filterText.toLowerCase())) {
+          const option = document.createElement("option");
+          option.value = foodName;
+          option.textContent = foodName;
+          selectElement.appendChild(option);
+      }
   });
 }
 
@@ -213,117 +215,118 @@ function populateFoodSelect(selectElement, filterText = "") {
 function createMealsUI() {
   mealsContainer.innerHTML = "";
   meals.forEach(meal => {
-    const mealDiv = document.createElement("div");
-    mealDiv.classList.add("meal");
-    mealDiv.id = meal;
+      const mealDiv = document.createElement("div");
+      mealDiv.classList.add("meal");
+      mealDiv.id = meal;
 
-    const title = document.createElement("h3");
-    title.textContent = meal;
-    mealDiv.appendChild(title);
+      const title = document.createElement("h3");
+      title.textContent = meal;
+      mealDiv.appendChild(title);
 
-    // List food items in meal
-const foodList = document.createElement("div");
-foodList.classList.add("food-list");
-savedData.meals[meal].forEach((food, index) => {
-  const foodItem = document.createElement("div");
-  foodItem.classList.add("food-item");
+      // List food items in meal
+      const foodList = document.createElement("div");
+      foodList.classList.add("food-list");
+      savedData.meals[meal].forEach((food, index) => {
+          const foodItem = document.createElement("div");
+          foodItem.classList.add("food-item");
 
-  const nameSpan = document.createElement("span");
-  nameSpan.textContent = `${food.name} - ${food.grams}g`;
+          const nameSpan = document.createElement("span");
+          nameSpan.textContent = `${food.name} - ${food.grams}g`;
 
-  // تعديل العرض هنا
-  const infoSpan = document.createElement("span");
-  infoSpan.textContent =
-    `Calories:${food.calories % 1 === 0 ? food.calories.toFixed(0) : food.calories.toFixed(1)}, ` +
-    `Protein:${food.protein % 1 === 0 ? food.protein.toFixed(0) : food.protein.toFixed(1)}g, ` +
-    `Carb:${food.carbs % 1 === 0 ? food.carbs.toFixed(0) : food.carbs.toFixed(1)}g, ` +
-    `Fat:${food.fats % 1 === 0 ? food.fats.toFixed(0) : food.fats.toFixed(1)}g`;
+          // تعديل العرض هنا
+          const infoSpan = document.createElement("span");
+          infoSpan.textContent =
+              `Calories:${food.calories % 1 === 0 ? food.calories.toFixed(0) : food.calories.toFixed(1)}, ` +
+              `Protein:${food.protein % 1 === 0 ? food.protein.toFixed(0) : food.protein.toFixed(1)}g, ` +
+              `Carb:${food.carbs % 1 === 0 ? food.carbs.toFixed(0) : food.carbs.toFixed(1)}g, ` +
+              `Fat:${food.fats % 1 === 0 ? food.fats.toFixed(0) : food.fats.toFixed(1)}g`;
 
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "Delete";
-  deleteBtn.addEventListener("click", () => {
-    savedData.meals[meal].splice(index, 1);
-    saveData();
-    createMealsUI();
-  });
+          const deleteBtn = document.createElement("button");
+          deleteBtn.textContent = "Delete";
+          deleteBtn.addEventListener("click", () => {
+              savedData.meals[meal].splice(index, 1);
+              saveData();
+              createMealsUI();
+          });
 
-  foodItem.appendChild(nameSpan);
-  foodItem.appendChild(infoSpan);
-  foodItem.appendChild(deleteBtn);
-  foodList.appendChild(foodItem);
-});
-mealDiv.appendChild(foodList);
+          foodItem.appendChild(nameSpan);
+          foodItem.appendChild(infoSpan);
+          foodItem.appendChild(deleteBtn);
+          foodList.appendChild(foodItem);
+      });
+      mealDiv.appendChild(foodList);
 
-    // Add food controls
-    const controls = document.createElement("div");
-    controls.classList.add("add-food-controls");
+      // Add food controls
+      const controls = document.createElement("div");
+      controls.classList.add("add-food-controls");
 
-    // Filter input for food select
-    const foodFilterInput = document.createElement("input");
-    foodFilterInput.type = "text";
-    foodFilterInput.placeholder = "Search food...";
-    foodFilterInput.classList.add("food-filter-input");
-    controls.appendChild(foodFilterInput);
+      // Filter input for food select
+      const foodFilterInput = document.createElement("input");
+      foodFilterInput.type = "text";
+      foodFilterInput.placeholder = "Search food...";
+      foodFilterInput.classList.add("food-filter-input");
+      controls.appendChild(foodFilterInput);
 
-    // Select food dropdown
-    const foodSelect = document.createElement("select");
-    foodSelect.classList.add("food-select");
-    populateFoodSelect(foodSelect); // Populate initially
-    controls.appendChild(foodSelect);
+      // Select food dropdown
+      const foodSelect = document.createElement("select");
+      foodSelect.classList.add("food-select");
+      populateFoodSelect(foodSelect); // Populate initially
+      controls.appendChild(foodSelect);
 
-    // Event listener for filter input
-    foodFilterInput.addEventListener("input", () => {
-      populateFoodSelect(foodSelect, foodFilterInput.value);
-    });
+      // Event listener for filter input
+      foodFilterInput.addEventListener("input", () => {
+          populateFoodSelect(foodSelect, foodFilterInput.value);
+      });
 
-    // Input grams
-    const gramsInput = document.createElement("input");
-    gramsInput.type = "number";
-    gramsInput.min = "1";
-    gramsInput.value = "100";
-    gramsInput.placeholder = "grams";
-    controls.appendChild(gramsInput);
-
-    // Add button
-    const addBtn = document.createElement("button");
-    addBtn.textContent = "Add";
-    addBtn.addEventListener("click", () => {
-      const foodName = foodSelect.value;
-      const grams = parseFloat(gramsInput.value);
-      if (grams <= 0 || isNaN(grams)) {
-        // Replaced alert with console.error for better practice in iframes
-        console.error("Please enter a valid grams amount.");
-        return;
-      }
-      const foodInfo = foodsData[foodName];
-      if (!foodInfo) {
-        // Replaced alert with console.error for better practice in iframes
-        console.error("Please select a food item.");
-        return;
-      }
-      // Calculate macros per grams
-      const factor = grams / 100;
-      const foodEntry = {
-        name: foodName,
-        grams: grams,
-        calories: Math.round((foodInfo.calories * grams) / 100),
-        protein: Math.round((foodInfo.protein * grams) / 100 * 10) / 10,
-        carbs: Math.round((foodInfo.carbs * grams) / 100 * 10) / 10,
-        fats: Math.round((foodInfo.fats * grams) / 100 * 10) / 10
-      };
-      savedData.meals[meal].push(foodEntry);
-      saveData();
-      createMealsUI();
+      // Input grams
+      const gramsInput = document.createElement("input");
+      gramsInput.type = "number";
+      gramsInput.min = "1";
       gramsInput.value = "100";
-    });
-    controls.appendChild(addBtn);
+      gramsInput.placeholder = "grams";
+      controls.appendChild(gramsInput);
 
-    mealDiv.appendChild(controls);
+      // Add button
+      const addBtn = document.createElement("button");
+      addBtn.textContent = "Add";
+      addBtn.addEventListener("click", () => {
+          const foodName = foodSelect.value;
+          const grams = parseFloat(gramsInput.value);
+          if (grams <= 0 || isNaN(grams)) {
+              // Replaced alert with console.error for better practice in iframes
+              console.error("Please enter a valid grams amount.");
+              return;
+          }
+          const foodInfo = foodsData[foodName];
+          if (!foodInfo) {
+              // Replaced alert with console.error for better practice in iframes
+              console.error("Please select a food item.");
+              return;
+          }
+          // Calculate macros per grams
+          const factor = grams / 100;
+          const foodEntry = {
+            name: foodName,
+            grams: grams,
+            calories: foodInfo.calories * factor,
+            protein: foodInfo.protein * factor,
+            carbs: foodInfo.carbs * factor,
+            fats: foodInfo.fats * factor
+          };          
+          savedData.meals[meal].push(foodEntry);
+          saveData();
+          createMealsUI();
+          gramsInput.value = "100";
+      });
+      controls.appendChild(addBtn);
 
-    mealsContainer.appendChild(mealDiv);
+      mealDiv.appendChild(controls);
+
+      mealsContainer.appendChild(mealDiv);
   });
 }
 
+// === NEW updateSummary FUNCTION ===
 function updateSummary() {
   const goalCalories = savedData.goals.calories || 0;
   const goalProtein = savedData.goals.protein || 0;
@@ -336,29 +339,47 @@ function updateSummary() {
   let totalFats = 0;
 
   meals.forEach(meal => {
-    savedData.meals[meal].forEach(food => {
-      totalCalories += food.calories;
-      totalProtein += food.protein;
-      totalCarbs += food.carbs;
-      totalFats += food.fats;
-    });
+      savedData.meals[meal].forEach(food => {
+          totalCalories += food.calories;
+          totalProtein += food.protein;
+          totalCarbs += food.carbs;
+          totalFats += food.fats;
+      });
   });
 
-  // تعديل العرض بحيث يتم حذف الرقم العشري إذا كان 0
-  document.getElementById("totalCalories").textContent = 
-    totalCalories % 1 === 0 ? totalCalories.toFixed(0) : totalCalories.toFixed(1);
-  document.getElementById("totalProtein").textContent = 
-    totalProtein % 1 === 0 ? totalProtein.toFixed(0) : totalProtein.toFixed(1);
-  document.getElementById("totalCarbs").textContent = 
-    totalCarbs % 1 === 0 ? totalCarbs.toFixed(0) : totalCarbs.toFixed(1);
-  document.getElementById("totalFats").textContent = 
-    totalFats % 1 === 0 ? totalFats.toFixed(0) : totalFats.toFixed(1);
+  // --- تحديث قسم السعرات الحرارية ---
+  const leftCalories = goalCalories - totalCalories;
+  document.getElementById('totalCaloriesDisplay').textContent = totalCalories.toFixed(0);
+  document.getElementById('goalCaloriesDisplay').textContent = goalCalories.toFixed(0);
+  document.getElementById('leftCaloriesDisplay').textContent = leftCalories.toFixed(0) + ' kcal';
+  const caloriesProgress = (totalCalories / goalCalories) * 100;
+  document.getElementById('caloriesProgressBar').style.width = `${caloriesProgress > 100 ? 100 : caloriesProgress}%`;
 
-  document.getElementById("goalCaloriesDisplay").textContent = goalCalories;
-  document.getElementById("goalProteinDisplay").textContent = goalProtein;
-  document.getElementById("goalCarbsDisplay").textContent = goalCarbs;
-  document.getElementById("goalFatsDisplay").textContent = goalFats;
+  // --- تحديث قسم البروتين ---
+  const leftProtein = goalProtein - totalProtein;
+  document.getElementById('totalProteinDisplay').textContent = totalProtein.toFixed(0);
+  document.getElementById('goalProteinDisplay').textContent = goalProtein.toFixed(0);
+  document.getElementById('leftProteinDisplay').textContent = leftProtein.toFixed(0) + ' g';
+  const proteinProgress = (totalProtein / goalProtein) * 100;
+  document.getElementById('proteinProgressBar').style.width = `${proteinProgress > 100 ? 100 : proteinProgress}%`;
+
+  // --- تحديث قسم الكربوهيدرات ---
+  const leftCarbs = goalCarbs - totalCarbs;
+  document.getElementById('totalCarbsDisplay').textContent = totalCarbs.toFixed(0);
+  document.getElementById('goalCarbsDisplay').textContent = goalCarbs.toFixed(0);
+  document.getElementById('leftCarbsDisplay').textContent = leftCarbs.toFixed(0) + ' g';
+  const carbsProgress = (totalCarbs / goalCarbs) * 100;
+  document.getElementById('carbsProgressBar').style.width = `${carbsProgress > 100 ? 100 : carbsProgress}%`;
+  
+  // --- تحديث قسم الدهون ---
+  const leftFats = goalFats - totalFats;
+  document.getElementById('totalFatsDisplay').textContent = totalFats.toFixed(0);
+  document.getElementById('goalFatsDisplay').textContent = goalFats.toFixed(0);
+  document.getElementById('leftFatsDisplay').textContent = leftFats.toFixed(0) + ' g';
+  const fatsProgress = (totalFats / goalFats) * 100;
+  document.getElementById('fatsProgressBar').style.width = `${fatsProgress > 100 ? 100 : fatsProgress}%`;
 }
+
 
 function saveGoals() {
   const calories = parseFloat(document.getElementById("goalCalories").value) || 0;
@@ -386,16 +407,16 @@ function checkResetAtMidnight() {
   const lastReset = localStorage.getItem("lastResetDate");
   const today = new Date().toISOString().slice(0, 10);
   if (lastReset !== today) {
-    // Reset meals
-    savedData.meals = {
-      Breakfast: [],
-      Snack: [],
-      Lunch: [],
-      Dinner: [],
-      Snack2: []
-    };
-    saveData();
-    localStorage.setItem("lastResetDate", today);
+      // Reset meals
+      savedData.meals = {
+          Breakfast: [],
+          Snack: [],
+          Lunch: [],
+          Dinner: [],
+          Snack2: []
+      };
+      saveData();
+      localStorage.setItem("lastResetDate", today);
   }
 }
 
@@ -414,7 +435,7 @@ closeBtn.addEventListener('click', () => {
 
 window.addEventListener('click', (e) => {
   if (e.target === modal) {
-    modal.style.display = 'none';
+      modal.style.display = 'none';
   }
 });
 
