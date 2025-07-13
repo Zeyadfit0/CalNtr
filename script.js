@@ -170,6 +170,8 @@ const foodsData = {
   "مولتو": { calories: 463, protein: 7.4, carbs: 48, fats: 27 },
   "فطير قرص سادة": { calories: 434, protein: 7.6, carbs: 63.8, fats: 16.5 },
   "فوشار بالزيت بعد التحضير": { calories: 500, protein: 10, carbs: 55, fats: 25 },
+  "حلاوة طحينية البوادي": { calories: 530, protein: 10.3, carbs: 60, fats: 27.8 },
+  "شوكولاته بسكوت ويفر": { calories: 520, protein: 4.2, carbs: 64, fats: 29 },
 };
 
 
