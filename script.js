@@ -23,7 +23,7 @@ const foodsData = {
   "لحمه مفرومة (بدون دهن)": { calories: 153, protein: 26, carbs: 0, fats: 5 },
   "لحمه حمراء (بعد الطهي)": { calories: 187, protein: 30, carbs: 0, fats: 7 },
   "ستيك لحمة": { calories: 160, protein: 30, carbs: 0, fats: 5 },
-  "بطاطس (قبل الطهي)": { calories: 94, protein: 2, carbs: 21, fats: 0 },
+  "بطاطس (قبل الطهي)": { calories: 77, protein: 2, carbs: 17.5, fats: 0.1 },
   "بطاطس": { calories: 77, protein: 2, carbs: 17.5, fats: 0 },
   "بطاطا (قبل الطهي)": { calories: 86, protein: 2, carbs: 20, fats: 0 },
   "فول مدمس": { calories: 94, protein: 5.8, carbs: 13, fats: 2.8 },
@@ -172,6 +172,10 @@ const foodsData = {
   "فوشار بالزيت بعد التحضير": { calories: 500, protein: 10, carbs: 55, fats: 25 },
   "حلاوة طحينية البوادي": { calories: 530, protein: 10.3, carbs: 60, fats: 27.8 },
   "شوكولاته بسكوت ويفر": { calories: 520, protein: 4.2, carbs: 64, fats: 29 },
+  "تين برشومي": { calories: 74, protein: 0.8, carbs: 21.9, fats: 0.8 },
+  "تين مجفف": { calories: 250, protein: 3, carbs: 80, fats: 1 },
+  "دبوس دجاج": { calories: 176, protein: 14, carbs: 12, fats: 8 },
+  "اوراك دجاج (بعد الطهي)": { calories: 125, protein: 16.4, carbs: 0.5, fats: 6.5 },
 };
 
 
