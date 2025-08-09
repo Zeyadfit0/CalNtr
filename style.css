@@ -108,12 +108,12 @@ button:hover {
 }
 
 .food-item .edit-btn {
-  background-color: #ff4c4c;
+  background-color: #437bcf;
   color: white;
 }
 
 .food-item .edit-btn:hover {
-  background-color: #ff4c4c;
+  background-color: #437bcf;
 }
 
 .food-item .delete-btn {
