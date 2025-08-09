@@ -66,7 +66,6 @@ button:hover {
 }
 
 /* Meals and foods */
-
 .meal {
   margin-bottom: 20px;
   background-color: #5a5a5a;
@@ -89,95 +88,103 @@ button:hover {
   border-radius: 5px;
   align-items: center;
   color: #ddd;
+  flex-wrap: wrap;
 }
 
 .food-item span {
   flex: 1;
 }
 
-.food-item button {
-  background-color: #ff4c4c;
+.food-item .actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.food-item .edit-btn, .food-item .delete-btn {
   padding: 5px 10px;
-  margin-left: 10px;
-  border-radius: 80px;
+  border-radius: 5px;
   font-weight: normal;
+}
+
+.food-item .edit-btn {
+  background-color: #3b9cc8;
+  color: white;
+}
+
+.food-item .edit-btn:hover {
+  background-color: #4aabee;
+}
+
+.food-item .delete-btn {
+  background-color: #ff4c4c;
+  color: white;
+}
+
+.food-item .delete-btn:hover {
+  background-color: #ff6666;
 }
 
 /* Add food controls */
 .add-food-controls {
   margin-top: 10px;
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
-  align-items: center; /* Align items vertically in the middle */
-  gap: 10px; /* Space between elements */
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 
-/* Specific styles for the food filter input (search bar) */
-.add-food-controls .food-filter-input {
-  width: 100%; /* Make it take full width, forcing other elements below it */
-  padding: 8px;
-  border-radius: 80px;
-  border: none;
-  margin-bottom: 5px; /* Space between filter and the row below */
-  background-color: #ffffff; /* Dark gray background */
-  color: rgb(0, 0, 0); /* Light text for contrast on dark background */
-}
-
-/* Styles for the select dropdown */
-.add-food-controls select {
-    flex-grow: 1; /* Allow select to grow and take available space */
-    padding: 8px;
-    border-radius: 80px;
-    border: none;
-    background-color: #6a6a6a; /* Dark gray background */
-    color: #ddd; /* Light text for contrast on dark background */
-    -webkit-appearance: none; /* Remove default dropdown arrow for custom styling */
-    -moz-appearance: none;
-    appearance: none;
-    /* Custom SVG arrow color to light gray for visibility on dark background */
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23dddddd%22%20d%3D%22M287%20197.6l-131.6-131.6c-4.7-4.7-12.3-4.7-17%200L5.4%20197.6c-4.7%204.7-4.7%2012.3%200%2017l11.3%2011.3c4.7%204.7%2012.3%204.7%2017%200l102.8-102.8L258.7%20225.9c4.7%204.7%2012.3%204.7%2017%200l11.3-11.3c4.7-4.7%204.7-12.3%200-17z%22%2F%3E%3C%2Fsvg%3E');
-    background-repeat: no-repeat;
-    background-position: right 10px top 50%;
-    background-size: 12px auto;
-    padding-right: 30px; /* Make space for the custom arrow */
-    min-width: 150px; /* Ensure a minimum width for the select */
-}
-
-/* Styles for the grams input */
+.add-food-controls .food-filter-input,
+.add-food-controls select,
 .add-food-controls input[type="number"] {
-    width: 70px; /* Adjusted width for grams input */
-    padding: 8px; /* Consistent padding */
-    border-radius: 10px;
-    border: none;
-    background-color: #ffffff; /* Dark gray background */
-    color: rgb(0, 0, 0); /* Light text color */
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  background-color: #ffffff;
+  color: #000000;
+  box-sizing: border-box;
 }
 
-/* Styles for the Add button */
+/* جعل الكتابة في مربع الجرامات فقط في المنتصف */
+.add-food-controls input[type="number"] {
+  text-align: center;
+}
+
+.add-food-controls select {
+  background-color: #6a6a6a;
+  color: #ddd;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23dddddd%22%20d%3D%22M287%20197.6l-131.6-131.6c-4.7-4.7-12.3-4.7-17%200L5.4%20197.6c-4.7%204.7-4.7%2012.3%200%2017l11.3%2011.3c4.7%204.7%2012.3%204.7%2017%200l102.8-102.8L258.7%20225.9c4.7%204.7%2012.3%204.7%2017%200l11.3-11.3c4.7-4.7%204.7-12.3%200-17z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px auto;
+  padding-right: 30px;
+}
+
 .add-food-controls button {
-    padding: 8px 15px; /* Consistent padding with other buttons */
-    border-radius: 80px;
-    font-weight: bold;
-    white-space: nowrap; /* Prevent button text from wrapping */
+  flex: 1 1 100%;
+  padding: 8px 15px;
+  border-radius: 80px;
+  font-weight: bold;
+  white-space: nowrap;
 }
 
-/* Optional: Adjust for smaller screens */
 @media (max-width: 600px) {
-    .add-food-controls {
-        flex-direction: column; /* Stack elements vertically on small screens */
-        align-items: stretch; /* Stretch items to fill container width */
-    }
-    .add-food-controls .food-filter-input,
-    .add-food-controls select,
-    .add-food-controls input[type="number"],
-    .add-food-controls button {
-        width: 100%; /* Full width on small screens */
-    }
-    .add-food-controls input[type="number"] {
-        text-align: center; /* Center text in number input on small screens */
-    }
+  .add-food-controls {
+      flex-direction: column;
+      align-items: stretch;
+  }
+  .add-food-controls .food-filter-input,
+  .add-food-controls select,
+  .add-food-controls input[type="number"],
+  .add-food-controls button {
+      width: 100%;
+  }
 }
-
 
 /* Summary styling */
 .summary-section p {
@@ -197,7 +204,7 @@ footer {
 
 /* Modal styles */
 .modal {
-  display: none; /* Hidden by default */
+  display: none;
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -221,6 +228,39 @@ footer {
   position: relative;
 }
 
+#editFoodModal .modal-content h3 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+#editFoodModal .modal-content label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+#editFoodModal .modal-content input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#editFoodModal .modal-content button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #a20000;
+}
+#editFoodModal .modal-content button:hover {
+  background-color: #ff4c4c;
+}
+
 .close-btn {
   color: #ff4c4c;
   position: absolute;
@@ -236,92 +276,78 @@ footer {
 }
 
 /* Nutrition Summary Component Styles */
-
 .ملخص-تغذية {
   font-family: sans-serif;
-  background-color: #4d4d4d; /* Changed to match section background */
+  background-color: #4d4d4d;
   border-radius: 10px;
   padding: 15px;
   max-width: 100%;
   margin: 0 auto;
-  color: #ddd; /* Changed to match section text color */
+  color: #ddd;
 }
-
 .صف-العنوان,
 .عنصر-تغذية {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid #666; /* Changed border color for contrast */
+  border-bottom: 1px solid #666;
 }
-
 .صف-العنوان {
   font-weight: bold;
-  color: #ddd; /* Changed header color for contrast */
+  color: #ddd;
   font-size: 14px;
 }
-
 .صف-العنوان .تسمية {
   grid-column: 1 / 2;
-  text-align: right; 
+  text-align: right;
 }
 .صف-العنوان .اجمالي-تسمية,
 .صف-العنوان .هدف-تسمية,
 .صف-العنوان .متبقي-تسمية {
   text-align: center;
 }
-
-
 .عنصر-تغذية {
   position: relative;
-  border-bottom: 1px solid #666; /* Changed border color for contrast */
+  border-bottom: 1px solid #666;
 }
-
 .عنصر-تغذية:last-child {
   border-bottom: none;
 }
-
 .تسمية-العنصر {
   font-size: 16px;
   font-weight: 500;
-  color: #ddd; /* Changed item label color for contrast */
-  text-align: right;
+  color: #ddd;
+  text-align: start;
   padding-right: 10px;
 }
-
 .قيمة-العنصر {
   text-align: center;
   font-size: 16px;
   font-weight: 500;
-  color: #fff; /* Changed value color for better visibility */
+  color: #fff;
 }
-
 .حاوية-شريط-التقدم {
   grid-column: 1 / 5;
   height: 5px;
-  background-color: #666; /* Changed progress bar container color */
+  background-color: #666;
   border-radius: 5px;
   margin-top: 5px;
   overflow: hidden;
 }
-
 .شريط-التقدم {
   height: 100%;
   border-radius: 5px;
 }
-
 .تقدم-بروتين {
   background-color: #e9bb33;
 }
-
 .تقدم-كربوهيدرات {
   background-color: #3ec0ba;
 }
-
 .تقدم-دهون {
   background-color: #8e44ad;
 }
 .شريط-التقدم.تقدم-سعرات {
-  background-color: #3b9cc8; 
+  background-color: #3b9cc8;
 }
