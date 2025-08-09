@@ -178,9 +178,7 @@ const foodsData = {
   "اوراك دجاج (بعد الطهي)": { calories: 125, protein: 16.4, carbs: 0.5, fats: 6.5 },
 };
 
-
 const meals = ["Breakfast", "Snack", "Lunch", "Dinner", "Snack2"];
-
 const mealsContainer = document.getElementById("mealsContainer");
 
 // Initialize saved data or empty
@@ -194,6 +192,9 @@ let savedData = JSON.parse(localStorage.getItem("calorieTrackerData")) || {
       Snack2: []
   }
 };
+
+let editingMeal = null;
+let editingIndex = -1;
 
 function saveData() {
   localStorage.setItem("calorieTrackerData", JSON.stringify(savedData));
@@ -215,7 +216,6 @@ function populateFoodSelect(selectElement, filterText = "") {
       }
   });
 }
-
 
 // Create meals UI
 function createMealsUI() {
@@ -239,7 +239,6 @@ function createMealsUI() {
           const nameSpan = document.createElement("span");
           nameSpan.textContent = `${food.name} - ${food.grams}g`;
 
-          // تعديل العرض هنا
           const infoSpan = document.createElement("span");
           infoSpan.textContent =
               `Calories:${food.calories % 1 === 0 ? food.calories.toFixed(0) : food.calories.toFixed(1)}, ` +
@@ -247,17 +246,38 @@ function createMealsUI() {
               `Carb:${food.carbs % 1 === 0 ? food.carbs.toFixed(0) : food.carbs.toFixed(1)}g, ` +
               `Fat:${food.fats % 1 === 0 ? food.fats.toFixed(0) : food.fats.toFixed(1)}g`;
 
+          // Actions container for buttons
+          const actionsDiv = document.createElement("div");
+          actionsDiv.classList.add("actions");
+
+          // Edit Button (Now added first)
+          const editBtn = document.createElement("button");
+          editBtn.textContent = "Edit";
+          editBtn.classList.add("edit-btn");
+          editBtn.addEventListener("click", () => {
+              editingMeal = meal;
+              editingIndex = index;
+              document.getElementById('editFoodName').textContent = food.name;
+              document.getElementById('editGramsInput').value = food.grams;
+              document.getElementById('editFoodModal').style.display = 'block';
+          });
+
+          // Delete Button (Now added second)
           const deleteBtn = document.createElement("button");
           deleteBtn.textContent = "Delete";
+          deleteBtn.classList.add("delete-btn");
           deleteBtn.addEventListener("click", () => {
               savedData.meals[meal].splice(index, 1);
               saveData();
               createMealsUI();
           });
 
+          actionsDiv.appendChild(editBtn);
+          actionsDiv.appendChild(deleteBtn);
+
           foodItem.appendChild(nameSpan);
           foodItem.appendChild(infoSpan);
-          foodItem.appendChild(deleteBtn);
+          foodItem.appendChild(actionsDiv);
           foodList.appendChild(foodItem);
       });
       mealDiv.appendChild(foodList);
@@ -299,26 +319,24 @@ function createMealsUI() {
           const foodName = foodSelect.value;
           const grams = parseFloat(gramsInput.value);
           if (grams <= 0 || isNaN(grams)) {
-              // Replaced alert with console.error for better practice in iframes
               console.error("Please enter a valid grams amount.");
               return;
           }
           const foodInfo = foodsData[foodName];
           if (!foodInfo) {
-              // Replaced alert with console.error for better practice in iframes
               console.error("Please select a food item.");
               return;
           }
           // Calculate macros per grams
           const factor = grams / 100;
           const foodEntry = {
-            name: foodName,
-            grams: grams,
-            calories: foodInfo.calories * factor,
-            protein: foodInfo.protein * factor,
-            carbs: foodInfo.carbs * factor,
-            fats: foodInfo.fats * factor
-          };          
+              name: foodName,
+              grams: grams,
+              calories: foodInfo.calories * factor,
+              protein: foodInfo.protein * factor,
+              carbs: foodInfo.carbs * factor,
+              fats: foodInfo.fats * factor
+          };
           savedData.meals[meal].push(foodEntry);
           saveData();
           createMealsUI();
@@ -327,7 +345,6 @@ function createMealsUI() {
       controls.appendChild(addBtn);
 
       mealDiv.appendChild(controls);
-
       mealsContainer.appendChild(mealDiv);
   });
 }
@@ -386,7 +403,6 @@ function updateSummary() {
   document.getElementById('fatsProgressBar').style.width = `${fatsProgress > 100 ? 100 : fatsProgress}%`;
 }
 
-
 function saveGoals() {
   const calories = parseFloat(document.getElementById("goalCalories").value) || 0;
   const protein = parseFloat(document.getElementById("goalProtein").value) || 0;
@@ -396,7 +412,6 @@ function saveGoals() {
   savedData.goals = { calories, protein, carbs, fats };
   saveData();
   updateSummary();
-  // Replaced alert with console.log for better practice in iframes
   console.log("Goals saved!");
 }
 
@@ -443,6 +458,44 @@ window.addEventListener('click', (e) => {
   if (e.target === modal) {
       modal.style.display = 'none';
   }
+});
+
+// Edit Modal controls
+const editModal = document.getElementById('editFoodModal');
+const closeEditModalBtn = document.getElementById('closeEditModal');
+const saveEditBtn = document.getElementById('saveEditBtn');
+const editGramsInput = document.getElementById('editGramsInput');
+
+closeEditModalBtn.addEventListener('click', () => {
+  editModal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+  if (e.target === editModal) {
+      editModal.style.display = 'none';
+  }
+});
+
+saveEditBtn.addEventListener('click', () => {
+  const newGrams = parseFloat(editGramsInput.value);
+  if (newGrams <= 0 || isNaN(newGrams)) {
+      console.error("Please enter a valid grams amount.");
+      return;
+  }
+
+  const foodItem = savedData.meals[editingMeal][editingIndex];
+  const foodInfo = foodsData[foodItem.name];
+  const factor = newGrams / 100;
+
+  foodItem.grams = newGrams;
+  foodItem.calories = foodInfo.calories * factor;
+  foodItem.protein = foodInfo.protein * factor;
+  foodItem.carbs = foodInfo.carbs * factor;
+  foodItem.fats = foodInfo.fats * factor;
+
+  saveData();
+  createMealsUI();
+  editModal.style.display = 'none';
 });
 
 // Initialize app
