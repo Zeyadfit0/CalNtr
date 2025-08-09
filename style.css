@@ -108,12 +108,12 @@ button:hover {
 }
 
 .food-item .edit-btn {
-  background-color: #3b9cc8;
+  background-color: #ff4c4c;
   color: white;
 }
 
 .food-item .edit-btn:hover {
-  background-color: #4aabee;
+  background-color: #ff4c4c;
 }
 
 .food-item .delete-btn {
@@ -242,7 +242,7 @@ footer {
 #editFoodModal .modal-content input {
   width: 100%;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
   margin-bottom: 20px;
   background-color: #ffffff;
   color: #000000;
@@ -254,7 +254,7 @@ footer {
 #editFoodModal .modal-content button {
   width: 100%;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: #a20000;
 }
 #editFoodModal .modal-content button:hover {
