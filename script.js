@@ -176,6 +176,8 @@ const foodsData = {
   "تين مجفف": { calories: 250, protein: 3, carbs: 80, fats: 1 },
   "دبوس دجاج": { calories: 176, protein: 14, carbs: 12, fats: 8 },
   "اوراك دجاج (بعد الطهي)": { calories: 125, protein: 16.4, carbs: 0.5, fats: 6.5 },
+  "سمسمية": { calories: 600, protein: 12, carbs: 55, fats: 28 },
+  "بسكوت بسكريم": { calories: 510, protein: 5, carbs: 65.5, fats: 24.5 },
 };
 
 const meals = ["Breakfast", "Snack", "Lunch", "Dinner", "Snack2"];
