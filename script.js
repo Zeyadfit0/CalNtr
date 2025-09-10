@@ -167,7 +167,7 @@ const foodsData = {
   "تانج تفاح": { calories: 420, protein: 0, carbs: 99, fats: 0 },
   "رز صيادية": { calories: 160, protein: 3, carbs: 30, fats: 6 },
   "بيض امليت": { calories: 180, protein: 12, carbs: 2, fats: 15 },
-  "مولتو": { calories: 463, protein: 7.4, carbs: 48, fats: 27 },
+  "مولتو شوكولاتة": { calories: 463, protein: 7.4, carbs: 48, fats: 27 },
   "فطير قرص سادة": { calories: 434, protein: 7.6, carbs: 63.8, fats: 16.5 },
   "فوشار بالزيت بعد التحضير": { calories: 500, protein: 10, carbs: 55, fats: 25 },
   "حلاوة طحينية البوادي": { calories: 530, protein: 10.3, carbs: 60, fats: 27.8 },
@@ -178,6 +178,7 @@ const foodsData = {
   "اوراك دجاج (بعد الطهي)": { calories: 125, protein: 16.4, carbs: 0.5, fats: 6.5 },
   "سمسمية": { calories: 600, protein: 12, carbs: 55, fats: 28 },
   "بسكوت بسكريم": { calories: 510, protein: 5, carbs: 65.5, fats: 24.5 },
+  "مولتو فراولة": { calories: 403, protein: 7.3, carbs: 53, fats: 18 },
 };
 
 const meals = ["Breakfast", "Snack", "Lunch", "Dinner", "Snack2"];
